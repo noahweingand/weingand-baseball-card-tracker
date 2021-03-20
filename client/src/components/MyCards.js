@@ -16,6 +16,11 @@ class MyCards extends Component {
         this.setState({cards: cards});
     }
 
+    async deleteCard(cardId) {
+        await axios.delete('/cards/' + cardId);
+        this.getAllCards();
+    }
+
     async componentDidMount() {
         await this.getAllCards();
         console.log(this.state.cards)
@@ -24,7 +29,7 @@ class MyCards extends Component {
     render() {
         return (
             <div>
-                <Table>
+                <Table striped bordered hover size="sm">
                     <thead>
                         <th>Number</th>
                         <th>Name</th>
@@ -37,6 +42,9 @@ class MyCards extends Component {
                         <th>Fabric</th>
                         <th>Refractor</th>
                         <th>Relic</th>
+                        <th>Price</th>
+                        <th>For Sale</th>
+                        <th>Sold Price</th>
                     </thead>
                     <tbody>
                     {this.state.cards.map((card, idx) =>
@@ -49,15 +57,19 @@ class MyCards extends Component {
                             <td>{card.sport}</td>
                             <td>{card.team}</td>
                             <td>{card.year}</td>
-                            <td>{card.isFabric}</td>
-                            <td>{card.isRefractor}</td>
+                            <td>{(card.isFabric) ? "Yes" : "No"}</td>
+                            <td>{(card.isRefractor) ? "Yes" : "No"}</td>
                             <td>{card.relic}</td>
-                            <td>Delete Button</td>
+                            <td>{card.price}</td>
+                            <td>{(card.for_sale) ? "Yes" : "No"}</td>
+                            <td>{card.sold_amount}</td>
+                            <td>
+                                <Button onClick={() => this.deleteCard(card.id)} variant="danger" size="sm">X</Button>
+                            </td>
                         </tr>
                     )} 
                     </tbody>
                 </Table>
-                <Button></Button>
             </div>
         )
     }
