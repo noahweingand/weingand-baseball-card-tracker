@@ -24,7 +24,6 @@ class MyCards extends Component {
 
     async componentDidMount() {
         await this.getAllCards();
-        console.log(this.state.cards)
     }
 
     render() {

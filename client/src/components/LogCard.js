@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import axios from '../helpers/axiosConfig';
 
 class LogCard extends Component {
     constructor(props) {
@@ -69,17 +69,16 @@ class LogCard extends Component {
         this.setState({ relic: e.target.value })
     }
     onChangeIsRefractor(e) {
-        this.setState({ isRefractor: true })
-        console.log(this.state.isRefractor);
+        this.setState({ isRefractor: e.target.checked })
     }
     onChangeIsFabric(e) {
-        this.setState({ isFabric: true })
+        this.setState({ isFabric: e.target.checked })
     }
     onChangePrice(e) {
         this.setState({ price: e.target.value })
     }
     onChangeForSale(e) {
-        this.setState({ for_sale: true })
+        this.setState({ for_sale: e.target.checked })
     }
     onChangeSoldAmount(e) {
         this.setState({ sold_amount: e.target.value })
@@ -183,10 +182,10 @@ class LogCard extends Component {
                         </Form.Text>
                     </Form.Group>
                     <Form.Group as={Col} style={{paddingTop: "38px"}} as={Col} controlId="refractorForm">
-                        <Form.Check type="checkbox" value={this.state.isRefractor} onChange={this.onChangeIsRefractor} label="Refractor?" />
+                        <Form.Check type="checkbox" onChange={this.onChangeIsRefractor} label="Refractor?" />
                     </Form.Group>
                     <Form.Group as={Col} style={{paddingTop: "38px"}} controlId="fabricForm">
-                        <Form.Check type="checkbox" value={this.state.isFabric} onChange={this.onChangeIsFabric} label="Fabric?" />
+                        <Form.Check type="checkbox" onChange={this.onChangeIsFabric} label="Fabric?" />
                     </Form.Group> 
                 </Form.Row>
 
@@ -196,7 +195,7 @@ class LogCard extends Component {
                         <Form.Control type="price" value={this.state.price} onChange={this.onChangePrice} placeholder="Enter a price" />
                     </Form.Group>
                     <Form.Group as={Col} style={{paddingTop: "38px"}} controlId="forSaleForm">
-                        <Form.Check type="checkbox" value={this.state.for_sale} onChange={this.onChangeForSale} label="For Sale?" />
+                        <Form.Check type="checkbox" onChange={this.onChangeForSale} label="For Sale?" />
                     </Form.Group>
                     <Form.Group as={Col} controlId="soldAmountForm">
                         <Form.Label>Sold Price</Form.Label>
