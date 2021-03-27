@@ -2,6 +2,9 @@ import { Component } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../helpers/axiosConfig';
+require('dotenv').config();
+
+const AUTH_API_KEY = process.env.REACT_APP_AUTH_API_KEY;
 
 class LogCard extends Component {
     constructor(props) {
@@ -104,7 +107,7 @@ class LogCard extends Component {
             sold_amount: this.state.sold_amount
         }
 
-        axios.post('/cards', submitParams)
+        axios.post('/cards', submitParams, {headers: {Authorization: process.env.REACT_APP_AUTH_API_KEY}})
             .then((res) => {
                 console.log(res.data);
             })
