@@ -60,6 +60,10 @@ const fields = [
     {
         label: 'Sold Amount',
         value: 'sold_amount'
+    },
+    {
+        label: 'Location',
+        value: 'location'
     }
 ]
 

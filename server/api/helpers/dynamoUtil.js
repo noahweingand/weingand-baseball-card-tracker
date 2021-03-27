@@ -40,7 +40,8 @@ var dynamoUtil = {
                     'year': params.year,
                     'for_sale': params.for_sale,
                     'price': params.price,
-                    'sold_amount': params.sold_amount
+                    'sold_amount': params.sold_amount,
+                    'location': params.location
                 }
             }
 
