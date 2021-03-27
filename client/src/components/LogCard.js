@@ -24,6 +24,7 @@ class LogCard extends Component {
         this.onChangePrice = this.onChangePrice.bind(this);
         this.onChangeForSale = this.onChangeForSale.bind(this);
         this.onChangeSoldAmount = this.onChangeSoldAmount.bind(this);
+        this.onChangeLocation = this.onChangeLocation.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
@@ -40,7 +41,8 @@ class LogCard extends Component {
             isFabric: false,
             price: '',
             for_sale: false,
-            sold_amount: ''
+            sold_amount: '',
+            location: ''
         }
     }
 
@@ -86,6 +88,9 @@ class LogCard extends Component {
     onChangeSoldAmount(e) {
         this.setState({ sold_amount: e.target.value })
     }
+    onChangeLocation(e) {
+        this.setState({ location: e.target.value })
+    }
 
     onSubmit(e) {
         e.preventDefault();
@@ -104,7 +109,8 @@ class LogCard extends Component {
             isFabric: this.state.isFabric,
             price: this.state.price,
             for_sale: this.state.for_sale,
-            sold_amount: this.state.sold_amount
+            sold_amount: this.state.sold_amount,
+            location: this.state.location
         }
 
         axios.post('/cards', submitParams, {headers: {Authorization: process.env.REACT_APP_AUTH_API_KEY}})
@@ -186,19 +192,16 @@ class LogCard extends Component {
                     </Form.Group>
                     <Form.Group as={Col} style={{paddingTop: "38px"}} as={Col} controlId="refractorForm">
                         <Form.Check type="checkbox" onChange={this.onChangeIsRefractor} label="Refractor?" />
-                    </Form.Group>
-                    <Form.Group as={Col} style={{paddingTop: "38px"}} controlId="fabricForm">
                         <Form.Check type="checkbox" onChange={this.onChangeIsFabric} label="Fabric?" />
-                    </Form.Group> 
+                        <Form.Check type="checkbox" onChange={this.onChangeForSale} label="For Sale?" />
+                    </Form.Group>
                 </Form.Row>
 
                 <Form.Row>
                     <Form.Group as={Col} controlId="priceForm">
                         <Form.Label>Price</Form.Label>
                         <Form.Control type="price" value={this.state.price} onChange={this.onChangePrice} placeholder="Enter a price" />
-                    </Form.Group>
-                    <Form.Group as={Col} style={{paddingTop: "38px"}} controlId="forSaleForm">
-                        <Form.Check type="checkbox" onChange={this.onChangeForSale} label="For Sale?" />
+                        
                     </Form.Group>
                     <Form.Group as={Col} controlId="soldAmountForm">
                         <Form.Label>Sold Price</Form.Label>
@@ -207,6 +210,10 @@ class LogCard extends Component {
                         This can be left blank.
                         </Form.Text>
                     </Form.Group> 
+                    <Form.Group as={Col} controlId="locationForm">
+                        <Form.Label>Location</Form.Label>
+                        <Form.Control type="location" value={this.state.location} onChange={this.onChangeLocation} placeholder="Enter the location" />
+                    </Form.Group>
                 </Form.Row>
 
                 <Button style={{float: "center"}} variant="primary" type="submit">Log</Button>
