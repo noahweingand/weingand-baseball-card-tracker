@@ -3,6 +3,7 @@ import { Table, Button } from 'react-bootstrap';
 import Loader from "react-loader-spinner";
 import axios from '../helpers/axiosConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
+require('dotenv').config();
 
 const loaderStyle = { position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }
 
@@ -24,7 +25,7 @@ class MyCards extends Component {
     }
 
     async deleteCard(cardId) {
-        await axios.delete('/cards/' + cardId);
+        await axios.delete('/cards/' + cardId, {headers: {Authorization: process.env.REACT_APP_AUTH_API_KEY}});
         this.getAllCards();
     }
 
