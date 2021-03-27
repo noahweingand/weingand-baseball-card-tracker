@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import Loader from "react-loader-spinner";
 import axios from '../helpers/axiosConfig';
+import EditCard from './EditCard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 require('dotenv').config();
 
@@ -71,23 +72,26 @@ class MyCards extends Component {
                             </thead>
                             <tbody>
                             {this.state.cards.map((card, idx) =>
-                                <tr id={`card-${idx}`}>
-                                    <td>{Number(idx) + 1}</td>
-                                    <td>{card.first_name} {card.last_name}</td>
-                                    <td>{card.brand}</td>
-                                    <td>{card.card_number}</td>
-                                    <td>{card.serial_number}</td>
-                                    <td>{card.sport}</td>
-                                    <td>{card.team}</td>
-                                    <td>{card.year}</td>
-                                    <td>{(card.isFabric) ? "Yes" : "No"}</td>
-                                    <td>{(card.isRefractor) ? "Yes" : "No"}</td>
-                                    <td>{card.relic}</td>
-                                    <td>{card.price}</td>
-                                    <td>{(card.for_sale) ? "Yes" : "No"}</td>
-                                    <td>{card.sold_amount}</td>
-                                    <td>{card.location}</td>
-                                    <td>
+                                <tr key={`row-${idx}`}>
+                                    <td key={`idx-${idx}`}>{Number(idx) + 1}</td>
+                                    <td key={`fn-${idx}`}>{card.first_name} {card.last_name}</td>
+                                    <td key={`brand-${idx}`}>{card.brand}</td>
+                                    <td key={`card#-${idx}`}>{card.card_number}</td>
+                                    <td key={`serial-${idx}`}>{card.serial_number}</td>
+                                    <td key={`sport-${idx}`}>{card.sport}</td>
+                                    <td key={`team-${idx}`}>{card.team}</td>
+                                    <td key={`year-${idx}`}>{card.year}</td>
+                                    <td key={`fabric-${idx}`}>{(card.isFabric) ? "Yes" : "No"}</td>
+                                    <td key={`refractor-${idx}`}>{(card.isRefractor) ? "Yes" : "No"}</td>
+                                    <td key={`relic-${idx}`}>{card.relic}</td>
+                                    <td key={`price-${idx}`}>{card.price}</td>
+                                    <td key={`for_sale-${idx}`}>{(card.for_sale) ? "Yes" : "No"}</td>
+                                    <td key={`sold_amount-${idx}`}>{card.sold_amount}</td>
+                                    <td key={`location-${idx}`}>{card.location}</td>
+                                    <td key={`edit-${idx}`}>
+                                        <EditCard key={`edit-button-${idx}`} card={card} id={card.id} />
+                                    </td>
+                                    <td key={`delete-${idx}`}>
                                         <Button onClick={() => this.deleteCard(card.id)} variant="danger" size="sm">X</Button>
                                     </td>
                                 </tr>
