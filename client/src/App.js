@@ -4,10 +4,9 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  Redirect
+  Link
 } from "react-router-dom";
-import { Navbar, Nav, Button, Form, FormControl} from 'react-bootstrap';
+import { Navbar, Nav, Button, Form } from 'react-bootstrap';
 
 import MyCards from './components/MyCards';
 import LogCard from './components/LogCard';

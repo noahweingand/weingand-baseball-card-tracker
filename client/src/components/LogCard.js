@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../helpers/axiosConfig';
 require('dotenv').config();
 
-const AUTH_API_KEY = process.env.REACT_APP_AUTH_API_KEY;
-
 class LogCard extends Component {
     constructor(props) {
         super(props);
