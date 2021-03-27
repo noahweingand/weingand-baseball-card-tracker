@@ -70,6 +70,50 @@ var dynamoUtil = {
             console.log(error);
             return undefined;
         }
+    },
+
+    updateCard: async function (params) {
+        try {
+            const updateParams = {
+                TableName: process.env.TABLE_NAME,
+                Key: {
+                    'id': params.id
+                },
+                UpdateExpression: "SET brand=:b, card_number=:cn, #fn=:fn, for_sale=:fs, isFabric=:fab, isRefractor=:refrac, #ln=:ln, price=:p, relic=:r, serial_number=:sn, sold_amount=:sa, sport=:sport, team=:t, #yr=:yr, #loc=:l",
+                ExpressionAttributeNames: {
+                    '#yr': 'year',
+                    '#fn': 'first_name',
+                    '#ln': 'last_name',
+                    '#loc': 'location'
+                },
+                ExpressionAttributeValues:{
+                    ':b': params.brand,
+                    ':cn': params.card_number,
+                    ':fn': params.first_name,
+                    ':fs': params.for_sale,
+                    ':fab': params.isFabric,
+                    ':refrac': params.isRefractor,
+                    ':ln': params.last_name,
+                    ':p': params.price,
+                    ':r': params.relic,
+                    ':sn': params.serial_number,
+                    ':sa': params.sold_amount,
+                    ':sport': params.sport,
+                    ':t': params.team,
+                    ':yr': params.year,
+                    ':l': params.location
+                },
+                ReturnValues:"UPDATED_NEW"
+            }
+
+            const data = await docClient.update(updateParams).promise();
+            console.log(data);
+        }
+        catch (error) {
+            console.log(`Error updating card (id: ${params.id})`);
+            console.log(error);
+            return undefined;
+        }
     }
 }
 

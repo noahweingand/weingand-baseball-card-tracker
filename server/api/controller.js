@@ -138,6 +138,29 @@ var controllers = {
                 message: "Card not deleted!"
             })
         }
+    },
+
+    updateCard: async function (req, res) {
+        try {
+            console.log("Attempting to update card in db");
+
+            const params = req.body;
+
+            await dynamoUtil.updateCard(params);
+            
+            res.status(200).send({
+                status: 200,
+                message: "Card succesfully updated!"
+            })
+
+        }
+        catch (error) {
+            console.log("Error on updating card");
+            res.status(500).send({
+                status: 500,
+                message: "Card not deleted!"
+            })
+        }
     }
 };
 

@@ -20,4 +20,7 @@ module.exports = function (app) {
 
     // delete card from db
     app.route('/api/cards/:cardId').delete(controller.removeCard);
+
+    // update card in db
+    app.route('/api/cards/update').post(controller.updateCard);
 };
