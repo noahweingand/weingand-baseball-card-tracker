@@ -13,6 +13,8 @@ module.exports = function (app) {
     // download cards and info as CSV
     app.route('/api/cards/download').get(controller.downloadCards);
 
+    app.use(controller.authorize);
+
     // log card into db
     app.route('/api/cards').post(controller.logCard);
 

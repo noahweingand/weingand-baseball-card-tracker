@@ -25,6 +25,38 @@ var controllers = {
         }
     },
 
+    authorize: async function(req, res, next) {
+        var apiKey = req.headers.authorization;
+        
+        try {
+
+            // trash I know, but this is just for my father lol
+
+            let found; 
+
+            if (apiKey === process.env.AUTH_API_KEY) {
+                found = true;
+            }
+            else {
+                found = false;
+            }
+
+            if (!found) {
+                console.log('Authorization issues...');
+                res.json({
+                    status: 401,
+                    message: 'Had trouble authorizing API Key. Please make sure your application is registered or see administration for assistance',
+                });
+            }
+            else {
+                next();
+            }
+        } catch (error) {
+            console.log(error);
+            res.send(error);
+        }
+    },
+
     getCards: async function (req, res) {
         try {
             console.log("Attempting to get all cards from db");

@@ -52,6 +52,14 @@ const fields = [
     {
         label: 'For Sale',
         value: 'for_sale'
+    },
+    {
+        label: 'Price',
+        value: 'price'
+    },
+    {
+        label: 'Sold Amount',
+        value: 'sold_amount'
     }
 ]
 
